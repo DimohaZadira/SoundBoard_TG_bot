@@ -36,3 +36,18 @@ If everything is OK, responses "_This sound has been successfully deleted!_ ✅�
 Sends voice message containing file assosiated with <sound_name>.
 If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ ❌😲" and does nothing else.
 
+
+###
+```.env
+BOT_NAME=
+
+BOT_TOKEN=<bot api token>
+
+DB_HOST=<host with postgresql>
+
+DB_NAME=<database name>
+ 
+DB_USER=<name database user>
+
+DB_PASS=<password database user>
+```
