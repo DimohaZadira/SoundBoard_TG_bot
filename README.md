@@ -8,10 +8,13 @@ Waits for user to send a message with `.mp3` file attached. Adds this file to st
 Following commands with the same <sound_name> will be ignored. If need to rewrite sound, use the `@delete_sound` command.
 
 If there is no file attached, responses `Seems like there is no .mp3 file attached! 🧐` and does nothing else.
+
 If there are more than one file attached, responses `Seems like there are too many files! 🤓` and does nothing else.
 
 `@delete_sound <sound_name>`:
+
 Deletes `.mp3` file assosiated with entered name from storage.
+
 If there is no file assosiated with entered name, responses 'Didn't find file assosiated with entered <sound_name> in my storage! 😲' and does nothing else.
 
 `@play <sound_name>`:
