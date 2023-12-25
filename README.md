@@ -38,6 +38,7 @@ If there is no file assosiated with entered name, responses "_Didn't find file a
 
 
 ###
+.env:
 ```.env
 BOT_NAME=
 
