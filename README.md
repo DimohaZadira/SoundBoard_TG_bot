@@ -5,9 +5,14 @@ Adds user to the database.
 
 `/add_sound <sound_name>`:
 Waits for user to send a message with `.mp3` file attached. Adds this file to storage system and assosiates it with <sound_name>. This sound will be available by this name.
-Following commands with the same <sound_name> will be ignored. If need to rewrite sound, use the `@delete_sound` command.
+Following commands with the same <sound_name> will be ignored. If need to rewrite sound, use the `/delete_sound` command.
 
 If there is no <sound_name>, responses "_Please tell me how to name a sound you want to attach! Tell me /add_sound <sound_name>_ ❌🤔" and does nothing else.
+
+If everything is OK, responses "Got it! Now please send a message with .mp3 file attached...".
+
+###
+Handling of th enext message:
 
 If there is no file attached, responses "_Seems like there is no .mp3 file attached!_ ❌🧐" and does nothing else.
 
