@@ -37,8 +37,7 @@ Sends voice message containing file assosiated with <sound_name>.
 If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ ❌😲" and does nothing else.
 
 
-###
-.env:
+## .env:
 ```.env
 BOT_NAME=
 
