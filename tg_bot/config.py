@@ -6,6 +6,7 @@ from environs import Env
 class TgBot:
     token: str
 
+
 @dataclass
 class Database:
     host: str
@@ -13,7 +14,6 @@ class Database:
     password: str
     name: str
 
-    
 
 @dataclass
 class Config:
@@ -21,19 +21,16 @@ class Config:
     db: Database
 
 
-
 def load_config(path: str = None):
     env = Env()
     env.read_env(path)
 
     return Config(
-        tg_bot=TgBot(
-            token=env.str("BOT_TOKEN")
-        ),
+        tg_bot=TgBot(token=env.str("BOT_TOKEN")),
         db=Database(
             host=env.str("DB_HOST"),
             name=env.str("DB_NAME"),
             user=env.str("DB_USER"),
-            password=env.str("DB_PASS")
-        )
+            password=env.str("DB_PASS"),
+        ),
     )
