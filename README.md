@@ -12,7 +12,7 @@ If there is no <sound_name>, responses "_Please tell me how to name a sound you 
 If everything is OK, responses "Got it! Now please send a message with .mp3 file attached...".
 
 ###
-Handling of th enext message:
+Handling the next message:
 
 If there is no file attached, responses "_Seems like there is no .mp3 file attached!_ ❌🧐" and does nothing else.
 
