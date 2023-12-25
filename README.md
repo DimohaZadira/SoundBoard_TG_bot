@@ -25,7 +25,7 @@ If there is no file assosiated with entered name, responses "_Didn't find file a
 
 If everything is OK, responses "_This sound has been successfully deleted!_ ✅👾".
 
-`/play <sound_name>`:
+`@play <sound_name>` (inline bot's function):
 Sends voice message containing file assosiated with <sound_name>.
 If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ ❌😲" and does nothing else.
 
