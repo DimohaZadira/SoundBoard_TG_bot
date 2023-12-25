@@ -15,6 +15,8 @@ If summary amount of disk space allocated for this user exceeds 100mb, responses
 
 If everything is OK, responses "_Good job! Your sound has been successfully added! Try sending it to somebody using @play command!_ ✅😎".
 
+If there were no file since last execution of this command for this user and the current one is OK, responses "_Good job! Your sound has been successfully added! Previous attempts are forgotten!_ 🟨✅".
+
 `/delete_sound <sound_name>`:
 
 Deletes `.mp3` file assosiated with entered name from storage.
