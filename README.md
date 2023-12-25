@@ -9,6 +9,8 @@ Following commands with the same <sound_name> will be ignored. If need to rewrit
 
 If there is no <sound_name>, responses "_Please tell me how to name a sound you want to attach! Tell me /add_sound <sound_name>_ ❌🤔" and does nothing else.
 
+If there is already a file attached to <sound_name>, responses "_I already have a sound with that name! Please come up with something else!_ ❌😒"
+
 If everything is OK, responses "Got it! Now please send a message with .mp3 file attached...".
 
 ###
