@@ -1,0 +1,1 @@
+from .main import register_start_handler

@@ -1,0 +1,5 @@
+aiogram >= 2.0,<3.0
+aioredis
+environs == 8.0.0
+sqlalchemy
+psycopg2
