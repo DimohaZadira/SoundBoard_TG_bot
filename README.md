@@ -7,9 +7,13 @@ Adds user to the database.
 Waits for user to send a message with `.mp3` file attached. Adds this file to storage system and assosiates it with <sound_name>. This sound will be available by this name.
 Following commands with the same <sound_name> will be ignored. If need to rewrite sound, use the `@delete_sound` command.
 
-If there is no file attached, responses "_Seems like there is no .mp3 file attached!_ 🧐" and does nothing else.
+If there is no file attached, responses "_Seems like there is no .mp3 file attached!_ ❌🧐" and does nothing else.
 
-If there are more than one file attached, responses "_Seems like there are too many files!_ 🤓" and does nothing else.
+If there are more than one file attached, responses "_Seems like there are too many files!_ ❌🤓" and does nothing else.
+
+If summary amount of disk space allocated for this user exceeds 100mb, responses "_Your disk space limit is reached! Try deleting some unused sounds first!_ ❌😢" and does nothing else.
+
+If everything is OK, responses "_Good job! Your sound has been successfully added! Try sending it to somebody using @play command!_ ✅😎".
 
 `@delete_sound <sound_name>`:
 
