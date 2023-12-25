@@ -1,9 +1,9 @@
 # SoundBoard TG bot!
 ## Supported commands:
-`@start`:
+`/start`:
 Adds user to the database.
 
-`@add_sound <sound_name>`:
+`/add_sound <sound_name>`:
 Waits for user to send a message with `.mp3` file attached. Adds this file to storage system and assosiates it with <sound_name>. This sound will be available by this name.
 Following commands with the same <sound_name> will be ignored. If need to rewrite sound, use the `@delete_sound` command.
 
@@ -15,13 +15,15 @@ If summary amount of disk space allocated for this user exceeds 100mb, responses
 
 If everything is OK, responses "_Good job! Your sound has been successfully added! Try sending it to somebody using @play command!_ ✅😎".
 
-`@delete_sound <sound_name>`:
+`/delete_sound <sound_name>`:
 
 Deletes `.mp3` file assosiated with entered name from storage.
 
-If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ 😲" and does nothing else.
+If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ ❌😲" and does nothing else.
 
-`@play <sound_name>`:
+If everything is OK, responses "_This sound has been successfully deleted!_ ✅👾".
+
+`/play <sound_name>`:
 Sends voice message containing file assosiated with <sound_name>.
-If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ 😲" and does nothing else.
+If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ ❌😲" and does nothing else.
 
