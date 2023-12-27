@@ -1,5 +1,5 @@
 from sqlalchemy.orm import sessionmaker, declarative_base
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from tg_bot.config import load_config
 
 config = load_config(".env")
@@ -16,6 +16,8 @@ class Files(Base):
     __tablename__ = "files"
     Id = Column(Integer, primary_key=True)
     Id_user = Column(Integer)
+    Id_audio = Column(String)
+    Date_genering_id = Column(DateTime)
     Name_sound = Column(String)
     Path = Column(String)
 

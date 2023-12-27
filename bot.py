@@ -36,7 +36,7 @@ async def main():
     try:
         await dp.start_polling()
     finally:
-        await dp.storager.close()
+        await dp.storage.close()
         await dp.storage.wait_closed()
         await bot.session.close()
 
