@@ -119,11 +119,11 @@ async def delete_message(message: types.message):
         )
 
 
-async def upload_voice_and_get_link(bot, path):
+async def upload_voice_and_get_link(bot, path, chat_id):
     voice_path = path
 
     with open(voice_path, "rb") as voice_file:
-        voice_message = await bot.send_voice(chat_id="1924535035", voice=voice_file)
+        voice_message = await bot.send_voice(chat_id=chat_id, voice=voice_file)
         return voice_message.voice.file_id
 
 
@@ -190,7 +190,7 @@ async def inline_echo(inline_query: types.InlineQuery):
                 audio.export(output_file, format="oga")
             except Exception as E:
                 print(E)
-            file_id = await upload_voice_and_get_link(inline_query.bot, output_file)
+            file_id = await upload_voice_and_get_link(inline_query.bot, output_file, inline_query.from_user.id)
             i.Id_audio = file_id
             i.Date_genering_id = datetime.datetime.now()
             os.remove(output_file)
