@@ -62,4 +62,6 @@ DB_USER=<name database user>
 DB_PASS=<password database user>
 ```
 
-### Also You need to install ```ffmpeg``` and ```ffprobe```
+### Also You need to install:
+```sudo apt install ffmpeg```
+```sudo apt install ffprobe```
