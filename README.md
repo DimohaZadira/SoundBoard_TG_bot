@@ -2,7 +2,7 @@
 ## Supported commands:
 `/start`:
 Adds user to the database. Responses "_Hi there! There is a list of my functions:
-1) /add_sound <sound_name>. Use it in order to add a new sound into my storage. ➕
+1) /add_sound <sound_name>. Use it in order to add a new sound into my storage. This sound will be available by this name later on. ➕
 2) /list_sounds. Use it to view the list of sounds you added earlier that are currently available. 📌
 3) /delete_sound <sound_name>. I suppose it's pretty clear what this command does 🧐
 4) (inline) @myBotName <sound_name>. Use this command from any chat you want and choose your <sound_name>. I will send a voice message that contains your .mp3 file assosiated with this name. 🔊_"
