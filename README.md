@@ -61,3 +61,5 @@ DB_USER=<name database user>
 
 DB_PASS=<password database user>
 ```
+
+### Also You need to install ```ffmpeg``` and ```ffprobe```
