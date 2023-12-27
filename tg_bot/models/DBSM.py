@@ -20,6 +20,7 @@ class Files(Base):
     Date_genering_id = Column(DateTime)
     Name_sound = Column(String)
     Path = Column(String)
+    Size_audio = Column(Integer)
 
 
 Base.metadata.create_all(engine)
