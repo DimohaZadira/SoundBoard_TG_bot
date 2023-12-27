@@ -64,4 +64,4 @@ DB_PASS=<password database user>
 
 ### Also You need to install:
 ```sudo apt install ffmpeg```
-```sudo apt install ffprobe```
+```sudo apt install fprobe```
