@@ -38,13 +38,13 @@ If there were no file since last execution of this command for this user and the
 
 Deletes `.mp3` file assosiated with entered name from storage.
 
-If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ ❌😲" and does nothing else.
+If there is no file assosiated with entered name, responses "_Didn't find a file assosiated with entered name "<sound_name>" in my storage!_ ❌😲" and does nothing else.
 
 If everything is OK, responses "_This sound has been successfully deleted!_ ✅👾".
 
 `@MyBotName <sound_name>` (inline bot's function):
-Sends voice message containing file assosiated with <sound_name>.
-If there is no file assosiated with entered name, responses "_Didn't find file assosiated with entered <sound_name> in my storage!_ ❌😲" and does nothing else.
+Sends voice message containing a file assosiated with <sound_name>.
+If there is no file assosiated with entered name, responses "_Didn't finda file assosiated with entered name "<sound_name>" in my storage!_ ❌😲" and does nothing else.
 
 
 ## .env:
