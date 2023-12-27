@@ -30,7 +30,7 @@ If there are more than one file attached, responses "_Seems like there are too m
 
 If summary amount of disk space allocated for this user exceeds 100mb, responses "_Your disk space limit is reached! Try deleting some unused sounds first!_ ❌😢" and does nothing else.
 
-If everything is OK, responses "_Good job! Your sound has been successfully added! Try sending it to somebody using @MyBoName inline command!_ ✅😎".
+If everything is OK, responses "_Good job! Your sound has been successfully added! Try sending it to somebody using @MyBotName inline command!_ ✅😎".
 
 If there were no file since last execution of this command for this user and the current one is OK, responses "_Good job! Your sound has been successfully added! Previous attempts are forgotten!_ 🟨✅".
 
