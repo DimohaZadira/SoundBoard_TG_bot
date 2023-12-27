@@ -223,7 +223,7 @@ async def inline_echo(inline_query: types.InlineQuery):
             results=res,
             cache_time=1,
             switch_pm_text=f"All sounds:",
-            switch_pm_parameter="start",
+            switch_pm_parameter="list_sounds",
             is_personal=False,
             next_offset="",
         )
@@ -233,7 +233,7 @@ async def inline_echo(inline_query: types.InlineQuery):
             results=res,
             cache_time=1,
             switch_pm_text=f"""Didn't find a file assosiated with entered name "{inline_query.query}" in my storage! ❌😲""",
-            switch_pm_parameter=f"start",
+            switch_pm_parameter=f"list_sounds",
             is_personal=False,
             next_offset="",
         )
@@ -243,7 +243,7 @@ async def inline_echo(inline_query: types.InlineQuery):
             results=res,
             cache_time=1,
             switch_pm_text=f"All sounds, that name starts with: {inline_query.query}",
-            switch_pm_parameter="start",
+            switch_pm_parameter="list_sounds",
             is_personal=True,
             next_offset="",
         )
