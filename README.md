@@ -1,7 +1,14 @@
 # SoundBoard TG bot!
 ## Supported commands:
 `/start`:
-Adds user to the database.
+Adds user to the database. Responses "_Hi there! There is a list of my functions:
+1) /add_sound <sound_name>. Use it in order to add a new sound into my storage. ➕
+2) /list_sounds. Use it to view the list of sounds you added earlier that are currently available. 📌
+3) /delete_sound <sound_name>. I suppose it's pretty clear what this command does 🧐
+4) (inline) @myBotName <sound_name>. Use this command from any chat you want and choose your <sound_name>. I will send a voice message that contains your .mp3 file assosiated with this name._"
+
+`/list_sounds`:
+Prints the list of sounds that were added by user and are currently available. Responses "Your sounds are:\n📌<sound_name_1>\n📌<sound_name_2> etc..."
 
 `/add_sound <sound_name>`:
 Waits for user to send a message with `.mp3` file attached. Adds this file to storage system and assosiates it with <sound_name>. This sound will be available by this name.
