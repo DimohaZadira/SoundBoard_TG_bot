@@ -9,6 +9,7 @@ Adds user to the database. Responses "_Hi there! There is a list of my functions
 
 `/list_sounds`:
 Prints the list of sounds that were added by user and are currently available. Responses "Your sounds are:\n📌<sound_name_1>\n📌<sound_name_2> etc..."
+If there are not any sounds, responds "_There are not any sounds in your collection! Feel free to add ones by using command /add_sound <sound_name>_"
 
 `/add_sound <sound_name>`:
 Waits for user to send a message with `.mp3` file attached. Adds this file to storage system and assosiates it with <sound_name>. This sound will be available by this name.
