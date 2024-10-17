@@ -1,9 +1,0 @@
-aiogram >= 3.0
-aioredis
-environs == 8.0.0
-sqlalchemy
-psycopg2
-aiofiles
-pydub
-aiofiles
-requests
