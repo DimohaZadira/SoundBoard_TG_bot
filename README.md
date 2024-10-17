@@ -1,4 +1,18 @@
 # SoundBoard TG bot!
+## How to build
+
+The project is maintained with [poetry](https://python-poetry.org/). To run the bot populate your environment variables (consult the [.env section](#env)), run a database (potentially, locally, [for development](#spin-up-a-development-environment)) and run the bot with
+
+```
+poetry run python bot.py
+```
+
+To build distributions of this project run
+
+```
+poetry build
+```
+
 ## Supported commands:
 `/start`:
 Adds user to the database. Responses "_Hi there! There is a list of my functions:

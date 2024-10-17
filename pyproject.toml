@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "soundboard_tg_bot"
+version = "0.1.0"
+description = "Curate your own soundboard in Telegram"
+authors = [
+	"Ilya Savitsky <ipsavitsky234@gmail.com>",
+	"Dmitry Teterin <dimikson4@gmail.com>",
+	"Vladimir Bukharin <volodymyrbuharin@yandex.ru>"
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiogram = "^3.13.1"
+environs = "^11.0.0"
+sqlalchemy = "^2.0.36"
+pydub = "^0.25.1"
+requests = "^2.32.3"
+psycopg2-binary = "^2.9.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
