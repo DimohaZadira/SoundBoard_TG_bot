@@ -46,7 +46,6 @@ If everything is OK, responses "_This sound has been successfully deleted!_ ✅�
 Sends voice message containing a file assosiated with <sound_name>.
 If there is no file assosiated with entered name, responses "_Didn't finda file assosiated with entered name "<sound_name>" in my storage!_ ❌😲" and does nothing else.
 
-
 ## .env:
 ```.env
 BOT_NAME=
@@ -65,3 +64,13 @@ DB_PASS=<password database user>
 ### Also You need to install:
 ```sudo apt install ffmpeg```
 ```sudo apt install fprobe```
+
+## Spin up a development environment
+
+To start developing the bot, first run the postgres-in-docker instance.
+
+```bash
+./scripts/start_database.sh
+```
+
+Also, go to BotFather on Telegram and set up a test bot (don't forget to turn on inline mode). Set the token in your environment. The rest of the defaults for the database you are running are already in the root `.env` file. After you verify that your database started successfully, run the bot with `python3 bot.py` (assuming you have all the necessary depenencies installed).
