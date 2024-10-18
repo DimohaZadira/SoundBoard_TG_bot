@@ -4,7 +4,7 @@
 The project is maintained with [poetry](https://python-poetry.org/). To run the bot populate your environment variables (consult the [.env section](#env)), run a database (potentially, locally, [for development](#spin-up-a-development-environment)) and run the bot with
 
 ```
-poetry run python bot.py
+poetry run python soundboard_tg_bot
 ```
 
 To build distributions of this project run

@@ -1,35 +1,41 @@
 from aiogram import types
 from aiogram.types.input_file import FSInputFile
-from aiogram import dispatcher, F
+from aiogram import Dispatcher
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from tg_bot.states import Add_sound_state
-import os, hashlib, uuid, datetime, requests, json
-import aiofiles
-from sqlalchemy import and_, desc
+import os, datetime
+from sqlalchemy import and_
 from tg_bot.models import sessionmaker, engine, Files
 from pydub import AudioSegment
+
+class ExpectException(Exception):
+    pass
+
+def expect[T](elem: T | None, error: str = "Value is None") -> T:
+    if elem is None:
+        raise ExpectException(error)
+    return elem
 
 async def upload_voice_and_get_link(bot, path, chat_id):
     # voice_path = path
     voice_message = await bot.send_voice(chat_id=chat_id, voice=FSInputFile(path))
     return voice_message.voice.file_id
 
-def register_main_handlers(dp: dispatcher):
-
+def register_main_handlers(dp: Dispatcher):
     @dp.message(CommandStart())
     async def start_handler(message: types.Message):
         text = """Hi there! There is a list of my functions:\n\n/add_sound <sound_name>. Use it in order to add a new sound into my storage. This sound will be available by this name later on. ➕\n\n/list_sounds. Use it to view the list of sounds you added earlier that are currently available. 📌\n\n/delete_sound <sound_name>. I suppose it's pretty clear what this command does 🧐\n\n(inline) @myBotName <sound_name>. Use this command from any chat you want and choose your <sound_name>. I will send a voice message that contains your .mp3 file assosiated with this name. 🔊"""
         await message.answer(text)
 
     @dp.message(Command("add_sound"))
-    async def add_sound_handler(message: types.message, state: FSMContext):
-        name = message.text[11:]
+    async def add_sound_handler(message: types.Message, state: FSMContext):
+        name = expect(message.text)[11:]
         Session = sessionmaker()
         session = Session(bind=engine)
         sound_this_name = (
             session.query(Files)
-            .filter(Files.Id_user == message.from_user.id, Files.Name_sound == name)
+            .filter(Files.Id_user == expect(message.from_user).id, Files.Name_sound == name)
             .all()
         )
         session.close()
@@ -50,21 +56,20 @@ def register_main_handlers(dp: dispatcher):
             await message.answer("Now, please send me a sound with .mp3 extension")
 
     @dp.message(Add_sound_state.add)
-    async def get_audio(message: types.Document, state: FSMContext):
+    async def get_audio(message: types.Message, state: FSMContext):
         try:
-            file_id = message.audio.file_id
-            # async with state.proxy() as data:
-            #     name = data["name"]
+            file_id = expect(message.audio).file_id
             data = await state.get_data()
-            file = await message.bot.get_file(file_id)
-            file_path = file.file_path
+            file = await expect(message.bot).get_file(file_id)
+            file_path = expect(file.file_path)
 
-            if not os.path.exists(f"files/{message.from_user.id}"):
-                os.makedirs(f"files/{message.from_user.id}")
+            user_id = expect(message.from_user).id
+            if not os.path.exists(f"files/{user_id}"):
+                os.makedirs(f"files/{user_id}")
 
             file_name = os.path.basename(file_path)
-            local_file_path = f"files/{message.from_user.id}/{file_name}"
-            await message.bot.download_file(file_path, local_file_path)
+            local_file_path = f"files/{user_id}/{file_name}"
+            await expect(message.bot).download_file(file_path, local_file_path)
 
             input_file = local_file_path
 
@@ -73,7 +78,7 @@ def register_main_handlers(dp: dispatcher):
             Session = sessionmaker()
             session = Session(bind=engine)
             all_media = (
-                session.query(Files).filter(Files.Id_user == message.from_user.id).all()
+                session.query(Files).filter(Files.Id_user == user_id).all()
             )
             all_size = 0
             for i in all_media:
@@ -81,7 +86,7 @@ def register_main_handlers(dp: dispatcher):
 
             if size + all_size < 1024 * 1024 * 100:  # - 100 Mb
                 new_file = Files(
-                    Id_user=message.from_user.id,
+                    Id_user=user_id,
                     Name_sound=data["name"],
                     Path=local_file_path,
                     Size_audio=size,
@@ -105,15 +110,17 @@ def register_main_handlers(dp: dispatcher):
             await state.clear()
 
     @dp.message(Command("delete_sound"))
-    async def delete_message(message: types.message):
-        name = message.text[14:]
+    async def delete_message(message: types.Message):
+        name = expect(message.text)[14:]
         try:
             Session = sessionmaker()
             session = Session(bind=engine)
 
+            user_id = expect(message.from_user).id
+
             file = (
                 session.query(Files)
-                .filter(Files.Name_sound == name, Files.Id_user == message.from_user.id)
+                .filter(Files.Name_sound == name, Files.Id_user == user_id)
                 .first()
             )
             try:
@@ -135,7 +142,9 @@ def register_main_handlers(dp: dispatcher):
         Session = sessionmaker()
         session = Session(bind=engine)
 
-        all_media = session.query(Files).filter(Files.Id_user == message.from_user.id).all()
+        user_id = expect(message.from_user).id
+
+        all_media = session.query(Files).filter(Files.Id_user == user_id).all()
 
         session.close()
 
@@ -215,6 +224,7 @@ def register_main_handlers(dp: dispatcher):
         session.close()
 
         res = []
+        bot = expect(inline_query.bot)
         for i in files:
             voice = types.InlineQueryResultCachedVoice(
                 id=str(i.Id),
@@ -223,7 +233,7 @@ def register_main_handlers(dp: dispatcher):
             )
             res.append(voice)
         if inline_query.query == "":
-            await inline_query.bot.answer_inline_query(
+            await bot.answer_inline_query(
                 inline_query.id,
                 results=res,
                 cache_time=1,
@@ -233,7 +243,7 @@ def register_main_handlers(dp: dispatcher):
                 next_offset="",
             )
         if res == []:
-            await inline_query.bot.answer_inline_query(
+            await bot.answer_inline_query(
                 inline_query.id,
                 results=res,
                 cache_time=1,
@@ -243,7 +253,7 @@ def register_main_handlers(dp: dispatcher):
                 next_offset="",
             )
         else:
-            await inline_query.bot.answer_inline_query(
+            await bot.answer_inline_query(
                 inline_query.id,
                 results=res,
                 cache_time=1,
