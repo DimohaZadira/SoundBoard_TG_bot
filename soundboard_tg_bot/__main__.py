@@ -3,8 +3,8 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
-from tg_bot.config import load_config
-from tg_bot.handlers import register_main_handlers
+from soundboard_tg_bot.tg_bot.config import load_config
+from soundboard_tg_bot.tg_bot.handlers import register_main_handlers
 
 logger = logging.getLogger(__name__)
 

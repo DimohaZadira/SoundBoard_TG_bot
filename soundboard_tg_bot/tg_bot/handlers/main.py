@@ -3,10 +3,10 @@ from aiogram.types.input_file import FSInputFile
 from aiogram import Dispatcher
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
-from tg_bot.states import Add_sound_state
+from soundboard_tg_bot.tg_bot.states import Add_sound_state
 import os, datetime
 from sqlalchemy import and_
-from tg_bot.models import sessionmaker, engine, Files
+from soundboard_tg_bot.tg_bot.models import sessionmaker, engine, Files
 from pydub import AudioSegment
 
 class ExpectException(Exception):

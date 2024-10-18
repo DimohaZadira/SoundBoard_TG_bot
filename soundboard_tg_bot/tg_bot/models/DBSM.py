@@ -1,6 +1,6 @@
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
-from tg_bot.config import load_config
+from soundboard_tg_bot.tg_bot.config import load_config
 
 config = load_config(".env")
 engine = create_engine(
