@@ -1,6 +1,8 @@
 from dataclasses import dataclass
-from environs import Env
 from typing import Optional
+
+from environs import Env
+
 
 @dataclass
 class TgBot:

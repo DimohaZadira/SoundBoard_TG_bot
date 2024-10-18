@@ -1,26 +1,32 @@
-from aiogram import types
-from aiogram.types.input_file import FSInputFile
-from aiogram import Dispatcher
+import datetime
+import os
+
+from aiogram import Dispatcher, types
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
-from soundboard_tg_bot.tg_bot.states import Add_sound_state
-import os, datetime
-from sqlalchemy import and_
-from soundboard_tg_bot.tg_bot.models import sessionmaker, engine, Files
+from aiogram.types.input_file import FSInputFile
 from pydub import AudioSegment
+from sqlalchemy import and_
+
+from soundboard_tg_bot.tg_bot.models import Files, engine, sessionmaker
+from soundboard_tg_bot.tg_bot.states import Add_sound_state
+
 
 class ExpectException(Exception):
     pass
+
 
 def expect[T](elem: T | None, error: str = "Value is None") -> T:
     if elem is None:
         raise ExpectException(error)
     return elem
 
+
 async def upload_voice_and_get_link(bot, path, chat_id):
     # voice_path = path
     voice_message = await bot.send_voice(chat_id=chat_id, voice=FSInputFile(path))
     return voice_message.voice.file_id
+
 
 def register_main_handlers(dp: Dispatcher):
     @dp.message(CommandStart())
@@ -35,7 +41,9 @@ def register_main_handlers(dp: Dispatcher):
         session = Session(bind=engine)
         sound_this_name = (
             session.query(Files)
-            .filter(Files.Id_user == expect(message.from_user).id, Files.Name_sound == name)
+            .filter(
+                Files.Id_user == expect(message.from_user).id, Files.Name_sound == name
+            )
             .all()
         )
         session.close()
@@ -77,9 +85,7 @@ def register_main_handlers(dp: Dispatcher):
 
             Session = sessionmaker()
             session = Session(bind=engine)
-            all_media = (
-                session.query(Files).filter(Files.Id_user == user_id).all()
-            )
+            all_media = session.query(Files).filter(Files.Id_user == user_id).all()
             all_size = 0
             for i in all_media:
                 all_size += i.Size_audio
@@ -106,7 +112,9 @@ def register_main_handlers(dp: Dispatcher):
                 )
                 await state.clear()
         except Exception as e:
-            await message.answer(f"{e}: {data}: Seems like there is no .mp3 file attached! ❌🧐")
+            await message.answer(
+                f"{e}: {data}: Seems like there is no .mp3 file attached! ❌🧐"
+            )
             await state.clear()
 
     @dp.message(Command("delete_sound"))
@@ -204,7 +212,9 @@ def register_main_handlers(dp: Dispatcher):
                     audio.export(output_file, format="oga")
                 except Exception as E:
                     print(E)
-                file_id = await upload_voice_and_get_link(inline_query.bot, output_file, inline_query.from_user.id)
+                file_id = await upload_voice_and_get_link(
+                    inline_query.bot, output_file, inline_query.from_user.id
+                )
                 i.Id_audio = file_id
                 i.Date_genering_id = datetime.datetime.now()
                 os.remove(output_file)
@@ -262,4 +272,3 @@ def register_main_handlers(dp: Dispatcher):
                 is_personal=True,
                 next_offset="",
             )
-
