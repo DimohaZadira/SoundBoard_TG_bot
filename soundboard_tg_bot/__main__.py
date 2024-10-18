@@ -5,7 +5,6 @@ from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from tg_bot.config import load_config
 from tg_bot.handlers import register_main_handlers
-import tg_bot.models.DBSM
 
 logger = logging.getLogger(__name__)
 

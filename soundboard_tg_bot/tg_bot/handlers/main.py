@@ -1,12 +1,11 @@
 from aiogram import types
 from aiogram.types.input_file import FSInputFile
-from aiogram import dispatcher, F
+from aiogram import dispatcher
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from tg_bot.states import Add_sound_state
-import os, hashlib, uuid, datetime, requests, json
-import aiofiles
-from sqlalchemy import and_, desc
+import os, datetime
+from sqlalchemy import and_
 from tg_bot.models import sessionmaker, engine, Files
 from pydub import AudioSegment
 
