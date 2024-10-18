@@ -23,7 +23,6 @@ def expect[T](elem: T | None, error: str = "Value is None") -> T:
 
 
 async def upload_voice_and_get_link(bot, path, chat_id):
-    # voice_path = path
     voice_message = await bot.send_voice(chat_id=chat_id, voice=FSInputFile(path))
     return voice_message.voice.file_id
 
@@ -56,10 +55,7 @@ def register_main_handlers(dp: Dispatcher):
                 "I already have a sound with that name! Please come up with something else! ❌😒"
             )
         else:
-            # await Add_sound_state.add.set()
             await state.set_state(Add_sound_state.add)
-            # async with state.proxy() as data:
-            #     data["name"] = name
             await state.update_data(name=name)
             await message.answer("Now, please send me a sound with .mp3 extension")
 
@@ -132,7 +128,7 @@ def register_main_handlers(dp: Dispatcher):
                 .first()
             )
             try:
-                os.remove(f"{file.Path}")
+                os.remove(f"{expect(file).Path}")
             except Exception as E:
                 pass
 
