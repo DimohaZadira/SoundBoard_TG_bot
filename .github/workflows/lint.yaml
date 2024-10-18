@@ -1,0 +1,43 @@
+name: Lint project
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/setup_environment
+      - run: poetry run mypy soundboard_tg_bot
+
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/setup_environment
+      - run: poetry run pylint --errors-only soundboard_tg_bot
+
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/setup_environment
+      - run: poetry run black --check soundboard_tg_bot
+      - run: poetry run isort --check-only soundboard_tg_bot
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rusty-actions/dockerfile-linter@v1
+        with:
+          dockerfile: ./Dockerfile
+
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v17

@@ -1,5 +1,6 @@
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from sqlalchemy import create_engine, Column, Integer, String, DateTime
+from sqlalchemy import Column, DateTime, Integer, String, create_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
+
 from soundboard_tg_bot.tg_bot.config import load_config
 
 config = load_config(".env")
@@ -9,8 +10,10 @@ engine = create_engine(
 Session = sessionmaker()
 session = Session(bind=engine)
 
+
 class Base(DeclarativeBase):
     pass
+
 
 class Files(Base):
     __tablename__ = "files"
