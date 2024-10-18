@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from environs import Env
-
+from typing import Optional
 
 @dataclass
 class TgBot:
@@ -21,7 +21,7 @@ class Config:
     db: Database
 
 
-def load_config(path: str = None):
+def load_config(path: Optional[str] = None):
     env = Env()
     env.read_env(path)
 
