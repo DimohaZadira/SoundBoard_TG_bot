@@ -18,7 +18,7 @@ def register_all_handlers(dp):
     register_main_handlers(dp)
 
 
-async def main():
+async def run():
     logging.basicConfig(
         level=logging.INFO,
         format="%(filename)s:%(lineno)d #%(levelname)-8s [%(asctime)s] - %(name)s - %(message)s",
@@ -40,8 +40,12 @@ async def main():
         await bot.session.close()
 
 
-if __name__ == "__main__":
+def main():
     try:
-        asyncio.run(main())
+        asyncio.run(run())
     except (KeyboardInterrupt, SystemExit):
         logger.error("Bot stopped!")
+
+
+if __name__ == "__main__":
+    main()
